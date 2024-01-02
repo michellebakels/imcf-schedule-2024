@@ -141,7 +141,7 @@ export function Schedule() {
 }
 
 
-function CalendarIcon(props) {
+function CalendarIcon(props: any) {
   return (
     <svg
       {...props}
@@ -164,7 +164,7 @@ function CalendarIcon(props) {
 }
 
 
-function FilterIcon(props) {
+function FilterIcon(props: any) {
   return (
     <svg
       {...props}
@@ -184,7 +184,7 @@ function FilterIcon(props) {
 }
 
 
-function TicketIcon(props) {
+function TicketIcon(props: any) {
   return (
     <svg
       {...props}
