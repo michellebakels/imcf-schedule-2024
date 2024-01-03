@@ -120,7 +120,7 @@ export async function Schedule() {
                   alt="Inter Miami CF Logo"
                   className="mr-2 w-8 h-8"
                   height="50"
-                  src={match.homeTeam.teamLogo.rawUrl || fallbackLogo}
+                  src={match?.homeTeam?.teamLogo?.rawUrl}
                   style={{
                     aspectRatio: "50/50",
                     objectFit: "cover",
@@ -135,7 +135,7 @@ export async function Schedule() {
                   alt="Team B Logo"
                   className="ml-2 w-8 h-8"
                   height="50"
-                  src={match.awayTeam.teamLogo.rawUrl || fallbackLogo}
+                  src={match?.awayTeam?.teamLogo?.rawUrl}
                   style={{
                     aspectRatio: "50/50",
                     objectFit: "cover",
