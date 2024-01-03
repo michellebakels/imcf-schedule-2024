@@ -130,7 +130,7 @@ export async function Schedule() {
                 <Badge className="mr-2 bg-[#F5B6CD] text-black">
                   {match?.homeTeam?._title === "InterMiamiCF" ? 'Home' : 'Away'}
                 </Badge>
-                <h2 className="text-lg md:text-xl">{`${match.homeTeam.teamName} vs. ${match.awayTeam.teamName}`}</h2>
+                <h2 className="text-lg md:text-xl">{`${match?.homeTeam?.teamName} vs. ${match?.awayTeam?.teamName}`}</h2>
                 <img
                   alt="Team B Logo"
                   className="ml-2 w-8 h-8"
@@ -144,7 +144,7 @@ export async function Schedule() {
                 />
               </div>
               <p className="text-gray-400">{`${formatDate(match.date)} ${match.time}`}</p>
-              <p className="text-gray-400 pt-1">{match.homeTeam.location}</p>
+              <p className="text-gray-400 pt-1">{match?.homeTeam?.location}</p>
               <p className="text-gray-400">{match.competition}</p>
             </CardHeader>
             <CardContent>
