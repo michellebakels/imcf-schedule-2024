@@ -112,7 +112,6 @@ export async function Schedule() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {matches.map((match) => (
         <div key={match._title}>
-          {console.log({match})}
           <Card>
             <CardHeader>
               <div className="flex items-center">
