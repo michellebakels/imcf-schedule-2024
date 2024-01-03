@@ -128,7 +128,7 @@ export async function Schedule() {
                   width="50"
                 />
                 <Badge className="mr-2 bg-[#F5B6CD] text-black">
-                  {match.homeTeam._title === "InterMiamiCF" ? 'Home' : 'Away'}
+                  {match?.homeTeam?._title === "InterMiamiCF" ? 'Home' : 'Away'}
                 </Badge>
                 <h2 className="text-lg md:text-xl">{`${match.homeTeam.teamName} vs. ${match.awayTeam.teamName}`}</h2>
                 <img
