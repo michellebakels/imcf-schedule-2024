@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuRadioItem, DropdownMenuRadioGroup, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
 import { CardHeader, CardContent, Card } from "@/components/ui/card"
+import fallbackLogo from "/public/fallback-logo.png"
 
 const getMatches = async () => {
   // query variables
@@ -119,7 +120,7 @@ export async function Schedule() {
                   alt="Inter Miami CF Logo"
                   className="mr-2 w-8 h-8"
                   height="50"
-                  src={match.homeTeam.teamLogo.rawUrl}
+                  src={match.homeTeam.teamLogo.rawUrl || fallbackLogo}
                   style={{
                     aspectRatio: "50/50",
                     objectFit: "cover",
@@ -134,7 +135,7 @@ export async function Schedule() {
                   alt="Team B Logo"
                   className="ml-2 w-8 h-8"
                   height="50"
-                  src={match.awayTeam.teamLogo.rawUrl}
+                  src={match.awayTeam.teamLogo.rawUrl || fallbackLogo}
                   style={{
                     aspectRatio: "50/50",
                     objectFit: "cover",
