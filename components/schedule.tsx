@@ -64,7 +64,7 @@ const getMatches = async () => {
   })
 };
 
-const formatDate = (date) => {
+const formatDate = (date: any) => {
   const matchDate = new Date(date)
   const start = new Date( matchDate.getTime() + ( matchDate.getTimezoneOffset() * 60000 ) )
   return `${start.getMonth() + 1}/${start.getDate()}`;
