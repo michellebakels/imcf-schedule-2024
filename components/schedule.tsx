@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuRadioItem, DropdownMenuRadioGroup, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
 import { CardHeader, CardContent, Card } from "@/components/ui/card"
-import fallbackLogo from "/public/fallback-logo.png"
 import { formatDate, matchValues } from "@/lib/utils"
+import AddToCalendar from "./addToCalendar"
 
 const getMatches = async () => {
   return await basehub({ next: { revalidate: 30 }}).query(matchValues)
@@ -58,7 +58,7 @@ export async function Schedule() {
         <div key={match._title}>
           <Card>
             <CardHeader>
-              <div className="flex items-center">
+              <div className="flex items-center justify-between">
                 <img
                   alt="Inter Miami CF Logo"
                   className="mr-2 w-8 h-8"
@@ -70,10 +70,7 @@ export async function Schedule() {
                   }}
                   width="50"
                 />
-                <Badge className="mr-2 bg-[#F5B6CD] text-black">
-                  {match?.homeTeam?._title === "InterMiamiCF" ? 'Home' : 'Away'}
-                </Badge>
-                <h2 className="text-lg md:text-xl">{`${match?.homeTeam?.teamName} vs. ${match?.awayTeam?.teamName}`}</h2>
+                <h2 className="text-lg md:text-lg text-center">{`${match?.homeTeam?.teamName}`} vs. <br/> {`${match?.awayTeam?.teamName}`}</h2>
                 <img
                   alt="Team B Logo"
                   className="ml-2 w-8 h-8"
@@ -86,73 +83,27 @@ export async function Schedule() {
                   width="50"
                 />
               </div>
-              <p className="text-gray-400">{`${formatDate(match.date)} ${match.time}`}</p>
-              <p className="text-gray-400 pt-1">{match?.homeTeam?.location}</p>
-              <p className="text-gray-400">{match.competition}</p>
+              <div className="pt-4">
+                <div className="flex flex-row mb-2">
+                  <Badge className="mr-2 bg-[#F5B6CD] text-black">
+                    {match?.homeTeam?._title === "InterMiamiCF" ? 'Home' : 'Away'}
+                  </Badge>
+                  <Badge className="mr-2 bg-[#F5B6CD] text-black">
+                    {match.competition}
+                  </Badge>
+                </div>
+                <p className="text-gray-400">{`${formatDate(match.date)} ${match.time}`}</p>
+                <p className="text-gray-400 pt-1">{match?.homeTeam?.location}</p>
+              </div>
             </CardHeader>
             <CardContent>
-              <Button className="w-full mb-2 bg-[#F5B6CD] text-black" variant="outline">
-                <CalendarIcon className="mr-2 h-4 w-4" />
-                Add to Calendar
-              </Button>
-              <div className="flex justify-between">
-                <Button className="w-1/2 mr-2 bg-gray-500 text-white" variant="outline">
-                  <TicketIcon className="mr-2 h-4 w-4" />
-                  Buy Tickets
-                </Button>
-                <Button className="w-1/2 bg-gray-500 text-white" variant="outline">
-                  Learn Chants
-                </Button>
+              <div className="flex justify-center">
+                <AddToCalendar match={match}/>
               </div>
             </CardContent>
           </Card>
         </div>
         ))}
-        {/*<div>
-          <Card>
-            <CardHeader>
-              <div className="flex items-center">
-                <img
-                  alt="Inter Miami CF Logo"
-                  className="mr-2 w-8 h-8 rounded-full"
-                  height="50"
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "50/50",
-                    objectFit: "cover",
-                  }}
-                  width="50"
-                />
-                <Badge className="mr-2 bg-[#F5B6CD] text-black">Away</Badge>
-                <h2 className="text-lg md:text-xl">Inter Miami CF vs Team D</h2>
-                <img
-                  alt="Team D Logo"
-                  className="ml-2 w-8 h-8 rounded-full"
-                  height="50"
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "50/50",
-                    objectFit: "cover",
-                  }}
-                  width="50"
-                />
-              </div>
-              <p className="text-gray-600">Jan 17, 2024 - 1:00 PM</p>
-              <p className="text-gray-600 pt-1">Location: DRV PNK Stadium</p>
-              <p className="text-gray-600">Competition: West</p>
-            </CardHeader>
-            <CardContent>
-              <Button className="w-full mb-2 bg-[#F5B6CD] text-black" variant="outline">
-                <CalendarIcon className="mr-2 h-4 w-4" />
-                Add to Calendar
-              </Button>
-              <Button className="w-full bg-gray-500 text-white" variant="outline">
-                <TicketIcon className="mr-2 h-4 w-4" />
-                Buy Tickets
-              </Button>
-            </CardContent>
-          </Card>
-        </div>*/}
       </div>
     </main>
   )
