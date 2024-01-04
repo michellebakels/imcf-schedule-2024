@@ -8,68 +8,11 @@ import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, Dropdown
 import { Badge } from "@/components/ui/badge"
 import { CardHeader, CardContent, Card } from "@/components/ui/card"
 import fallbackLogo from "/public/fallback-logo.png"
+import { formatDate, matchValues } from "@/lib/utils"
 
 const getMatches = async () => {
-  // query variables
-  return await basehub({ next: { revalidate: 30 }}).query({
-    schedule: {
-      _id: true,
-      _meta: {
-        totalCount: true,
-      },
-      _slug: true,
-      _title: true,
-      items: {
-        _id: true,
-        _slug: true,
-        _title: true,
-        awayTeam: {
-          _id: true,
-          _slug: true,
-          _title: true,
-          location: true,
-          teamLogo: {
-            alt: true,
-            aspectRatio: true,
-            fileName: true,
-            fileSize: true,
-            height: true,
-            lastModified: true,
-            mimeType: true,
-            rawUrl: true,
-          },
-          teamName: true,
-        },
-        competition: true,
-        date: true,
-        homeTeam: {
-          _id: true,
-          _slug: true,
-          _title: true,
-          location: true,
-          teamLogo: {
-            alt: true,
-            aspectRatio: true,
-            fileName: true,
-            fileSize: true,
-            height: true,
-            lastModified: true,
-            mimeType: true,
-            rawUrl: true,
-          },
-          teamName: true,
-        },
-        time: true,
-      },
-    },
-  })
+  return await basehub({ next: { revalidate: 30 }}).query(matchValues)
 };
-
-const formatDate = (date: any) => {
-  const matchDate = new Date(date)
-  const start = new Date( matchDate.getTime() + ( matchDate.getTimezoneOffset() * 60000 ) )
-  return `${start.getMonth() + 1}/${start.getDate()}`;
-}
 
 export async function Schedule() {
   const matchData = await getMatches()
@@ -93,14 +36,14 @@ export async function Schedule() {
               Filter Matches
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56 bg-black">
+          <DropdownMenuContent className="w-56 bg-white">
             <DropdownMenuLabel>Filter Options</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuRadioGroup defaultValue="all">
-              <DropdownMenuRadioItem value="competition">Friendly&apos;s</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="competition">Regular Season</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="competition">Leagues Cup</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="competition">MLS Playoffs</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="friendly">Friendly</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="regular">Regular Season</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="leaguesCup">Leagues Cup</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="playoffs">MLS Playoffs</DropdownMenuRadioItem>
               <DropdownMenuRadioItem value="home">Home Games</DropdownMenuRadioItem>
               <DropdownMenuRadioItem value="away">Away Games</DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
